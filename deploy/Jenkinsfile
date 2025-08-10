@@ -30,11 +30,6 @@ pipeline {
             }
         }
 
-        stage('Mostrar variables') {
-            steps {
-                sh 'printenv'
-            }
-        }
 
         stage('Login DockerHub') {
             steps {
