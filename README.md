@@ -101,3 +101,60 @@ Description: GitHub Personal Token
 
 
 ![img.png](img.png)
+
+### EN CASO NO SE ACTUALICE MV
+
+
+![img_1.png](img_1.png)
+
+
+
+
+```shell script
+
+
+docker exec -it -u 0 nombre_o_id_contenedor_jenkins bash
+apt-get update
+apt-get install maven -y
+apt-get install -y wget
+
+# RUN apt-get update && apt-get install -y wget&& rm -rf /var/lib/apt/lists/*
+
+
+
+# 1. Ir a /opt
+cd /opt
+
+# 2. Descargar Maven 3.9.11
+#wget https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
+wget https://dlcdn.apache.org/maven/maven-3/3.9.11/binaries/apache-maven-3.9.11-bin.tar.gz
+
+# 3. Extraer
+tar -xvzf apache-maven-3.9.11-bin.tar.gz
+
+# 4. Crear enlace simbólico para usarlo como mvn
+ln -s /opt/apache-maven-3.9.11/bin/mvn /usr/bin/mvn
+
+# 5. Verificar
+mvn -v
+
+### DETERMINAR POR DEFAULT UNA NUEVA VERSION DE MVN DE FORMA MANUAL 
+
+# Opción 1 – Sobrescribir el enlace
+# Si no te importa eliminar el binario anterior:
+
+rm -f /usr/bin/mvn
+ln -s /opt/apache-maven-3.9.11/bin/mvn /usr/bin/mvn
+
+# Eso eliminará el mvn viejo y creará el enlace simbólico al nuevo.
+
+# Opción 2 – Priorizar en el PATH (más limpio)
+
+# En vez de tocar /usr/bin, simplemente asegúrate de que la nueva ruta de Maven esté antes en el PATH:
+# BASH
+export PATH=/opt/apache-maven-3.9.11/bin:$PATH
+
+
+
+```
+
