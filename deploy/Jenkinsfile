@@ -7,7 +7,7 @@ pipeline {
     environment {
         SONARQUBE_ENV = 'SonarQube'
         DOCKER_IMAGE = "whuaqui/ms-wh-example-batch:1.0.0-SNAPSHOT"
-        PATH_DOCKERFILE ="./var/jenkins_home/workspace/ms-wh-example-batch/src/main/docker/Dockerfile.native-micro"
+        PATH_DOCKERFILE ="/var/jenkins_home/workspace/ms-wh-example-batch/src/main/docker/Dockerfile.native-micro"
     }
     stages {
         stage('Verificar Maven') {
