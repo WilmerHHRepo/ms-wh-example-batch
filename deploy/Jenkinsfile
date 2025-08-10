@@ -4,6 +4,10 @@ pipeline {
         maven 'Maven-3.9.11' // Nombre que configuraste en Tools
         jdk 'graalvm-21'        // Si tu proyecto lo necesita
     }
+    environment {
+        SONARQUBE_ENV = 'SonarQube'
+        DOCKER_IMAGE = "quay.io/quarkus/ubi9-quarkus-micro-image:2.0"
+    }
     stages {
         stage('Verificar Maven') {
             steps {
@@ -19,6 +23,11 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn clean install'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                sh "docker build -t $DOCKER_IMAGE ."
             }
         }
     }
