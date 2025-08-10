@@ -6,13 +6,15 @@ pipeline {
     }
     environment {
         SONARQUBE_ENV = 'SonarQube'
-        DOCKER_IMAGE = "redhat/ubi9:latest-source"
+        DOCKER_IMAGE = "whuaqui/ms-wh-example-batch:1.0.0-SNAPSHOT"
+        PATH_DOCKERFILE ="./var/jenkins_home/workspace/ms-wh-example-batch/src/main/docker/Dockerfile.native-micro"
     }
     stages {
         stage('Verificar Maven') {
             steps {
                 sh 'pwd'
                 sh 'ls -l'
+                sh 'ls -l /var/jenkins_home/workspace/ms-wh-example-batch/src/main/docker/'
                 sh 'echo $JAVA_HOME'
                 sh 'java -version'
                 sh 'javac -version'
@@ -27,7 +29,7 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh "docker build -t $DOCKER_IMAGE ."
+                sh "docker build -f $PATH_DOCKERFILE -t $DOCKER_IMAGE ."
             }
         }
     }
