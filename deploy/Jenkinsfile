@@ -8,9 +8,7 @@ pipeline {
         SONARQUBE_ENV = 'SonarQube'
         DOCKER_IMAGE = "whuaqui/ms-wh-example-batch:1.0.0-SNAPSHOT"
         PATH_DOCKERFILE ="/var/jenkins_home/workspace/ms-wh-example-batch/src/main/docker/Dockerfile.native-micro"
-        DOCKER_CREDENTIALS = credentials('dockerhub')
     }
-
     stages {
         stage('Verificar Maven') {
             steps {
@@ -31,13 +29,6 @@ pipeline {
         }
 
 
-        stage('Login DockerHub') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
-                }
-            }
-        }
 
         stage('Build Docker Image') {
             steps {
