@@ -6,7 +6,7 @@ pipeline {
     }
     environment {
         SONARQUBE_ENV = 'SonarQube'
-        DOCKER_IMAGE = "quay.io/quarkus/ubi9-quarkus-micro-image:2.0"
+        DOCKER_IMAGE = "docker/Dockerfile"
     }
     stages {
         stage('Verificar Maven') {
