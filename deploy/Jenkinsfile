@@ -10,11 +10,6 @@ pipeline {
         PATH_DOCKERFILE ="/var/jenkins_home/workspace/ms-wh-example-batch/src/main/docker/Dockerfile.native-micro"
         DOCKER_CREDENTIALS = credentials('dockerhub')
     }
-    stage('Mostrar variables') {
-        steps {
-            sh 'printenv'
-        }
-    }
 
     stages {
         stage('Verificar Maven') {
@@ -33,6 +28,20 @@ pipeline {
             steps {
                 sh 'mvn clean install'
             }
+        }
+
+        stage('Mostrar variables') {
+            steps {
+                sh 'printenv'
+            }
+        }
+        stage('Ver variables') {
+            steps {
+                script {
+                    env.getEnvironment().each { k, v ->
+                        println "${k} = ${v}"
+                    }
+                }
         }
         stage('Login DockerHub') {
             steps {
