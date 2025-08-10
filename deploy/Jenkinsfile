@@ -35,14 +35,7 @@ pipeline {
                 sh 'printenv'
             }
         }
-        stage('Ver variables') {
-            steps {
-                script {
-                    env.getEnvironment().each { k, v ->
-                        println "${k} = ${v}"
-                    }
-                }
-        }
+
         stage('Login DockerHub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
