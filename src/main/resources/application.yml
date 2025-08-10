@@ -1,0 +1,37 @@
+
+
+
+
+
+
+# Kafka bootstrap
+kafka:
+  bootstrap:
+    servers: localhost:9092
+
+
+mp:
+  messaging:
+    outgoing:
+      mi-producer:
+        connector: smallrye-kafka
+        topic: my-topic
+        value:
+          serializer: org.apache.kafka.common.serialization.StringSerializer
+        key:
+          serializer: org.apache.kafka.common.serialization.StringSerializer
+        acks: 1
+
+    incoming:
+      consumer-in:
+        connector: smallrye-kafka
+        topic: my-topic
+        value:
+          deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        key:
+          deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        group:
+          id: grupo-consumidor
+        auto:
+          offset:
+            reset: earliest

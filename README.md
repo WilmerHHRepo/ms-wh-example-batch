@@ -56,3 +56,48 @@ If you want to learn more about building native executables, please consult <htt
 ## Related Guides
 
 - Messaging - Kafka Connector ([guide](https://quarkus.io/guides/kafka-getting-started)): Connect to Kafka with Reactive Messaging
+
+
+
+## CONFIGURACION DE JEKINS
+
+
+✅ 1. Crear un Personal Access Token (PAT) en GitHub
+🔹 Pasos:
+Ve a https://github.com/settings/tokens
+
+Click en "Generate new token" → Fine-grained o Classic (se recomienda Classic para Jenkins)
+
+Selecciona:
+
+Repo (leer/clonar repositorios)
+
+Workflow (opcional si usas GitHub Actions)
+
+Elige la expiración (o sin expiración si es de confianza)
+
+Guarda el token que se genera → ¡No se puede recuperar luego!
+
+
+
+✅ 2. Agregar el token de GitHub en Jenkins como credencial
+🔹 Pasos:
+En Jenkins, ve a:
+Manage Jenkins → Credentials → (Global) → Add Credentials
+
+Tipo: Secret text
+
+Pega el token de GitHub como valor
+
+ID: github-token (o cualquier nombre que recuerdes)
+
+Description: GitHub Personal Token
+
+
+
+
+
+
+
+
+![img.png](img.png)

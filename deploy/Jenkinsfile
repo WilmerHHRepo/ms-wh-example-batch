@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+    tools {
+        maven 'Maven-3.9.6' // Nombre que configuraste en Tools
+        jdk 'JDK-17'        // Si tu proyecto lo necesita
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+    }
+}
