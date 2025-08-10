@@ -15,14 +15,7 @@ pipeline {
             sh 'printenv'
         }
     }
-    stage('Ver variables') {
-        steps {
-            script {
-                env.getEnvironment().each { k, v ->
-                    println "${k} = ${v}"
-                }
-            }
-    }
+
     stages {
         stage('Verificar Maven') {
             steps {
@@ -41,7 +34,13 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-
+        stage('Login DockerHub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                }
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
